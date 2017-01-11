@@ -1,0 +1,12 @@
+c:\users\valen\documents\visual studio 2015\Projects\Ode Chat v1\Ode Chat v1\bin\Debug\Ode Chat v1.exe.config
+c:\users\valen\documents\visual studio 2015\Projects\Ode Chat v1\Ode Chat v1\obj\Debug\Ode Chat v1.exe
+c:\users\valen\documents\visual studio 2015\Projects\Ode Chat v1\Ode Chat v1\obj\Debug\Ode Chat v1.pdb
+C:\Users\valen\Documents\Visual Studio 2015\Projects\Ode Chat - Client\Ode Chat v1\bin\Debug\Ode Chat v1.exe.config
+C:\Users\valen\Documents\Visual Studio 2015\Projects\Ode Chat - Client\Ode Chat v1\obj\Debug\Ode Chat v1.exe
+C:\Users\valen\Documents\Visual Studio 2015\Projects\Ode Chat - Client\Ode Chat v1\obj\Debug\Ode Chat v1.pdb
+C:\Users\valen\Documents\Visual Studio 2015\Projects\Ode Chat - Client\Ode Chat v1\bin\Debug\Ode Chat v1.exe
+C:\Users\valen\Documents\Visual Studio 2015\Projects\Ode Chat - Client\Ode Chat v1\bin\Debug\Ode Chat v1.pdb
+C:\Users\valen\Documents\Visual Studio 2015\Projects\Ode Chat - Client\Ode Chat v1\obj\Debug\Ode Chat - Client.csprojResolveAssemblyReference.cache
+C:\Users\valen\Documents\Visual Studio 2015\Projects\Ode Chat - Client\Ode Chat v1\obj\Debug\Ode_Chat_v1.Form1.resources
+C:\Users\valen\Documents\Visual Studio 2015\Projects\Ode Chat - Client\Ode Chat v1\obj\Debug\Ode_Chat_v1.Properties.Resources.resources
+C:\Users\valen\Documents\Visual Studio 2015\Projects\Ode Chat - Client\Ode Chat v1\obj\Debug\Ode Chat - Client.csproj.GenerateResource.Cache
