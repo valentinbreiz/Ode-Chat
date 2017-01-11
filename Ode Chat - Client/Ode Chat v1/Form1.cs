@@ -24,6 +24,9 @@ namespace Ode_Chat_v1
         private void Form1_Load(object sender, EventArgs e)
         {
             groupBox2.Enabled = false;
+
+            
+
         }
 
         private void ChangeTextBox(string txt)
@@ -41,21 +44,34 @@ namespace Ode_Chat_v1
 
         private void button3_Click(object sender, EventArgs e)
         {
-            if(textBox3.Text !="" && textBox4.Text !="")
+            Connexion();
+        }
+
+        private void Connexion()
+        {
+            if (textBox3.Text != "" && textBox4.Text != "")
             {
-                client = new Client();
-                client.ClientName = textBox4.Text;
-                client.ServerIp = textBox3.Text;
-                client.ServerPort = "5842";
-                client.OnClientConnected += new OnClientConnectedDelegate(client_OnClientConnected);
-                client.OnClientConnecting += new OnClientConnectingDelegate(client_OnClientConnecting);
-                client.OnClientDisconnected += new OnClientDisconnectedDelegate(client_OnClientDisconnected);
-                client.OnClientError += new OnClientErrorDelegate(client_OnClientError);
-                client.OnClientFileSending += new OnClientFileSendingDelegate(client_OnClientFileSending);
-                client.OnDataReceived += new OnClientReceivedDelegate(client_OnDataReceived);
-                client.Connect();
-                groupBox1.Enabled = false;
-                groupBox2.Enabled = true;
+                try
+                {
+                    client = new Client();
+                    client.ClientName = textBox3.Text;
+                    client.ServerIp = textBox4.Text;
+                    client.ServerPort = "5842";
+                    client.OnClientConnected += new OnClientConnectedDelegate(client_OnClientConnected);
+                    client.OnClientConnecting += new OnClientConnectingDelegate(client_OnClientConnecting);
+                    client.OnClientDisconnected += new OnClientDisconnectedDelegate(client_OnClientDisconnected);
+                    client.OnClientError += new OnClientErrorDelegate(client_OnClientError);
+                    client.OnClientFileSending += new OnClientFileSendingDelegate(client_OnClientFileSending);
+                    client.OnDataReceived += new OnClientReceivedDelegate(client_OnDataReceived);
+                    client.Connect();
+                    groupBox1.Enabled = false;
+                    groupBox2.Enabled = true;
+                    textBox2.Focus();
+                }
+                catch
+                {
+                    MessageBox.Show("erreur iconnue ;-;");
+                }
             }
             else
             {
@@ -66,6 +82,8 @@ namespace Ode_Chat_v1
         private void client_OnDataReceived(object Sender, ClientReceivedArguments R)
         {
             ChangeTextBox(R.ReceivedData);
+            
+
         }
 
         private void client_OnClientFileSending(object Sender, ClientFileSendingArguments R)
@@ -81,6 +99,8 @@ namespace Ode_Chat_v1
         private void client_OnClientDisconnected(object Sender, ClientDisconnectedArguments R)
         {
             ChangeTextBox(R.EventMessage);
+
+           
         }
 
         private void client_OnClientConnecting(object Sender, ClientConnectingArguments R)
@@ -106,6 +126,7 @@ namespace Ode_Chat_v1
             {
                 client.Send(textBox2.Text);
                 textBox2.Clear();
+
             }
         }
 
@@ -124,6 +145,30 @@ namespace Ode_Chat_v1
             groupBox1.Enabled = true;
             groupBox2.Enabled = false;
             client.Disconnect();
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox1.Visible)
+            {
+                textBox1.SelectionStart = textBox1.TextLength;
+                textBox1.ScrollToCaret();
+            }
+        }
+
+        private void textBox4_KeyDown(object sender, KeyEventArgs e)
+        {
+            if  (e.KeyCode == Keys.Enter)
+            {
+                Connexion();
+            }
+        }
+
+
+
+        private void Form1_Activated(object sender, EventArgs e)
+        {
+            
         }
     }
 }

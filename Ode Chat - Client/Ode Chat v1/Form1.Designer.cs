@@ -89,8 +89,11 @@
             this.textBox1.Location = new System.Drawing.Point(6, 19);
             this.textBox1.Multiline = true;
             this.textBox1.Name = "textBox1";
+            this.textBox1.ReadOnly = true;
+            this.textBox1.ScrollBars = System.Windows.Forms.ScrollBars.Vertical;
             this.textBox1.Size = new System.Drawing.Size(285, 270);
             this.textBox1.TabIndex = 5;
+            this.textBox1.TextChanged += new System.EventHandler(this.textBox1_TextChanged);
             // 
             // label2
             // 
@@ -112,17 +115,18 @@
             // 
             // textBox3
             // 
-            this.textBox3.Location = new System.Drawing.Point(123, 57);
+            this.textBox3.Location = new System.Drawing.Point(123, 24);
             this.textBox3.Name = "textBox3";
             this.textBox3.Size = new System.Drawing.Size(167, 20);
             this.textBox3.TabIndex = 11;
             // 
             // textBox4
             // 
-            this.textBox4.Location = new System.Drawing.Point(123, 24);
+            this.textBox4.Location = new System.Drawing.Point(123, 57);
             this.textBox4.Name = "textBox4";
             this.textBox4.Size = new System.Drawing.Size(167, 20);
             this.textBox4.TabIndex = 12;
+            this.textBox4.KeyDown += new System.Windows.Forms.KeyEventHandler(this.textBox4_KeyDown);
             // 
             // groupBox1
             // 
@@ -160,6 +164,7 @@
             this.Name = "Form1";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Ode Chat - Client";
+            this.Activated += new System.EventHandler(this.Form1_Activated);
             this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.Form1_FormClosing);
             this.Load += new System.EventHandler(this.Form1_Load);
             this.groupBox2.ResumeLayout(false);

@@ -109,12 +109,12 @@ namespace Ode_Chat___Server
 
         private void button1_Click(object sender, EventArgs e)
         {
-            server.SendTo((string)listBox1.SelectedItem, textBox2.Text);
+            server.SendTo((string)listBox1.SelectedItem, "serveur> " + textBox2.Text);
         }
 
         private void button2_Click(object sender, EventArgs e)
         {
-            server.BroadCast(textBox2.Text);
+            server.BroadCast("serveur> " + textBox2.Text);
         }
 
         private void button3_Click(object sender, EventArgs e)
@@ -135,6 +135,15 @@ namespace Ode_Chat___Server
         private void listBox2_SelectedIndexChanged(object sender, EventArgs e)
         {
             listBox1.SelectedIndex = listBox2.SelectedIndex;
+        }
+
+        private void textBox1_TextChanged(object sender, EventArgs e)
+        {
+            if (textBox1.Visible)
+            {
+                textBox1.SelectionStart = textBox1.TextLength;
+                textBox1.ScrollToCaret();
+            }
         }
     }
 }
