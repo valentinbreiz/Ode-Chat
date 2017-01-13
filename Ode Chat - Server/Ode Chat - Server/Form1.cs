@@ -27,14 +27,14 @@ namespace Ode_Chat___Server
 
         private void Form1_Load(object sender, EventArgs e)
         {
+            panel1.Visible = false;
+            label2.Visible = false;
+            textBox3.Visible = false;
+            label3.Visible = false;
+            button5.Visible = false;
             var LocalIP = GetLocalIP();
             this.Text = "Ode Chat - Serveur - " + GetLocalIP();
-            server = new Server(LocalIP, "5842");
-            server.OnClientConnected += new OnConnectedDelegate(server_OnClientConnected);
-            server.OnClientDisconnected += new OnDisconnectedDelegate(server_OnClientDisconnected);
-            server.OnDataReceived += new OnReceivedDelegate(server_OnDataReceived);
-            server.OnServerError += new OnErrorDelegate(server_OnServerError);
-            server.Start();
+            
         }
 
         private string GetLocalIP()
@@ -102,9 +102,17 @@ namespace Ode_Chat___Server
 
         private void server_OnClientConnected(object Sender, ConnectedArguments R)
         {
-            server.BroadCast(R.Name + " est connecté !");
-            ChangeListBox(listBox1, R.Name, false);
-            ChangeListBox(listBox2, R.Ip, false);
+            try
+            {
+                server.BroadCast(R.Name + " est connecté !");
+                ChangeListBox(listBox1, R.Name, false);
+                ChangeListBox(listBox2, R.Ip, false);
+            }
+            catch
+            {
+
+            }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -122,10 +130,6 @@ namespace Ode_Chat___Server
             server.DisconnectClient((string)listBox1.SelectedItem);
         }
 
-        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
-        {
-            System.Environment.Exit(System.Environment.ExitCode);
-        }
 
         private void listBox1_SelectedIndexChanged(object sender, EventArgs e)
         {
@@ -144,6 +148,152 @@ namespace Ode_Chat___Server
                 textBox1.SelectionStart = textBox1.TextLength;
                 textBox1.ScrollToCaret();
             }
+        }
+
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void textBox1_TextChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox1_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void groupBox1_Enter(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button3_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button2_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void listBox2_SelectedIndexChanged_1(object sender, EventArgs e)
+        {
+
+        }
+
+        private void textBox2_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button4_Click(object sender, EventArgs e)
+        {
+            var LocalIP = GetLocalIP();
+
+            if (radioButton1.Checked)
+            {
+                if (textBox3.Text != "")
+                {
+                    server = new Server(LocalIP, textBox3.Text);
+                    this.Text = "Ode Chat - Serveur - " + GetLocalIP() + ":" + textBox3.Text;
+                    server.OnClientConnected += new OnConnectedDelegate(server_OnClientConnected);
+                    server.OnClientDisconnected += new OnDisconnectedDelegate(server_OnClientDisconnected);
+                    server.OnDataReceived += new OnReceivedDelegate(server_OnDataReceived);
+                    server.OnServerError += new OnErrorDelegate(server_OnServerError);
+                    server.Start();
+                    panel1.Visible = true;
+                    panel2.Visible = false;
+
+                }
+                else
+                {
+                    MessageBox.Show("Vous n'avez pas renseigné de port !");
+                    panel2.Visible = true;
+                }
+                
+            }
+            else
+            {
+                server = new Server(LocalIP, "5842");
+                this.Text = "Ode Chat - Serveur - " + GetLocalIP() + ":5842";
+                server.OnClientConnected += new OnConnectedDelegate(server_OnClientConnected);
+                server.OnClientDisconnected += new OnDisconnectedDelegate(server_OnClientDisconnected);
+                server.OnDataReceived += new OnReceivedDelegate(server_OnDataReceived);
+                server.OnServerError += new OnErrorDelegate(server_OnServerError);
+                server.Start();
+                panel1.Visible = true;
+                panel2.Visible = false;
+            }
+            if (radioButton4.Checked)
+            {
+                MessageBox.Show("test2");
+            }
+        }
+
+        private void radioButton1_CheckedChanged(object sender, EventArgs e)
+        {
+            label2.Visible = true;
+            textBox3.Visible = true;
+            button5.Visible = true;
+        }
+
+        private void radioButton2_CheckedChanged(object sender, EventArgs e)
+        {
+            label2.Visible = false;
+            textBox3.Visible = false;
+            button5.Visible = false;
+            textBox3.Clear();
+        }
+
+        private void radioButton4_CheckedChanged(object sender, EventArgs e)
+        {
+            label3.Visible = true;
+            WebClient client = new WebClient();
+            string cle = client.DownloadString("http://partagedefiches.xyz/ode_chat/cle.txt");
+            textBox4.Text = cle;
+        }
+
+        private void radioButton3_CheckedChanged(object sender, EventArgs e)
+        {
+            label3.Visible = false;
+        }
+
+
+        private void textBox3_KeyPress(object sender, KeyPressEventArgs e)
+        {
+            if (Char.IsControl(e.KeyChar) || !Char.IsNumber(e.KeyChar))
+            {
+                e.Handled = true;
+                return;
+            }
+        }
+
+        private void button5_Click(object sender, EventArgs e)
+        {
+            try
+            {
+                textBox3.Text = textBox3.Text.Remove(textBox3.Text.Length - 1);
+
+            }
+            catch
+            {
+
+            }
+            
+        }
+
+        private void Form1_FormClosing(object sender, FormClosingEventArgs e)
+        {
+            System.Environment.Exit(System.Environment.ExitCode);
         }
     }
 }

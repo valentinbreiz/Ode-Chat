@@ -117,4 +117,10 @@
   <resheader name="writer">
     <value>System.Resources.ResXResourceWriter, System.Windows.Forms, Version=4.0.0.0, Culture=neutral, PublicKeyToken=b77a5c561934e089</value>
   </resheader>
+  <data name="label4.Text" xml:space="preserve">
+    <value>- Changer de port est fortement déconseillé, si votre client ne connait pas votre port (même si il connaît votre IP),
+il ne pourra pas se connecter.
+
+- Si vous utilisez une adresse no-ip verifiez bien d'utiliser le même port que celui renseigné sur votre Box !</value>
+  </data>
 </root>

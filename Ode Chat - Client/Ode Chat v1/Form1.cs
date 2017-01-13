@@ -70,7 +70,7 @@ namespace Ode_Chat_v1
                 }
                 catch
                 {
-                    MessageBox.Show("erreur iconnue ;-;");
+                    MessageBox.Show("erreur inconnue ;-;");
                 }
             }
             else
@@ -169,6 +169,16 @@ namespace Ode_Chat_v1
         private void Form1_Activated(object sender, EventArgs e)
         {
             
+        }
+
+        private void Form1_HelpButtonClicked(object sender, CancelEventArgs e)
+        {
+            if (MessageBox.Show("Do you want to exit?", "My Application",
+         MessageBoxButtons.YesNo, MessageBoxIcon.Question)
+         == DialogResult.Yes)
+            {
+                Application.Exit();
+            }
         }
     }
 }
