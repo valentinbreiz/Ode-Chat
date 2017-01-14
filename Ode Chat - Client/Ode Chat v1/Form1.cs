@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using NetworksApi.TCP.CLIENT;
 
+
 namespace Ode_Chat_v1
 {
     public delegate void UpdateText(string txt);
@@ -24,9 +25,7 @@ namespace Ode_Chat_v1
         private void Form1_Load(object sender, EventArgs e)
         {
             groupBox2.Enabled = false;
-
-            
-
+            textBox5.Visible = false;
         }
 
         private void ChangeTextBox(string txt)
@@ -53,42 +52,72 @@ namespace Ode_Chat_v1
             {
                 try
                 {
-                    client = new Client();
-                    client.ClientName = textBox3.Text;
-                    client.ServerIp = textBox4.Text;
-                    client.ServerPort = "5842";
-                    client.OnClientConnected += new OnClientConnectedDelegate(client_OnClientConnected);
-                    client.OnClientConnecting += new OnClientConnectingDelegate(client_OnClientConnecting);
-                    client.OnClientDisconnected += new OnClientDisconnectedDelegate(client_OnClientDisconnected);
-                    client.OnClientError += new OnClientErrorDelegate(client_OnClientError);
-                    client.OnClientFileSending += new OnClientFileSendingDelegate(client_OnClientFileSending);
-                    client.OnDataReceived += new OnClientReceivedDelegate(client_OnDataReceived);
-                    client.Connect();
-                    groupBox1.Enabled = false;
-                    groupBox2.Enabled = true;
-                    textBox2.Focus();
+                    if (checkBox1.Checked == true)
+                    {
+                        if (textBox5.Text != "")
+                        {
+                            client = new Client();
+                            client.ClientName = textBox3.Text;
+                            client.ServerIp = textBox4.Text;
+                            client.ServerPort = textBox5.Text;
+                            client.OnClientConnected += new OnClientConnectedDelegate(client_OnClientConnected);
+                            client.OnClientConnecting += new OnClientConnectingDelegate(client_OnClientConnecting);
+                            client.OnClientDisconnected += new OnClientDisconnectedDelegate(client_OnClientDisconnected);
+                            client.OnClientError += new OnClientErrorDelegate(client_OnClientError);
+                            client.OnClientFileSending += new OnClientFileSendingDelegate(client_OnClientFileSending);
+                            client.OnDataReceived += new OnClientReceivedDelegate(client_OnDataReceived);
+                            client.Connect();
+                            groupBox1.Enabled = false;
+                            groupBox2.Enabled = true;
+                            textBox2.Focus();
+
+                        }
+                        else
+                        {
+                            MessageBox.Show("Vous devez remplir les champs de texte !");
+                        }
+                        
+                    }
+                    else
+                    {
+                        client = new Client();
+                        client.ClientName = textBox3.Text;
+                        client.ServerIp = textBox4.Text;
+                        client.ServerPort = "5842";
+                        client.OnClientConnected += new OnClientConnectedDelegate(client_OnClientConnected);
+                        client.OnClientConnecting += new OnClientConnectingDelegate(client_OnClientConnecting);
+                        client.OnClientDisconnected += new OnClientDisconnectedDelegate(client_OnClientDisconnected);
+                        client.OnClientError += new OnClientErrorDelegate(client_OnClientError);
+                        client.OnClientFileSending += new OnClientFileSendingDelegate(client_OnClientFileSending);
+                        client.OnDataReceived += new OnClientReceivedDelegate(client_OnDataReceived);
+                        client.Connect();
+                        groupBox1.Enabled = false;
+                        groupBox2.Enabled = true;
+                        textBox2.Focus();
+                    }
+                    
                 }
                 catch
                 {
                     MessageBox.Show("erreur inconnue ;-;");
                 }
             }
+            
             else
             {
                 MessageBox.Show("Vous devez remplir les champs de texte !");
             }
+
         }
 
         private void client_OnDataReceived(object Sender, ClientReceivedArguments R)
         {
-            ChangeTextBox(R.ReceivedData);
-            
-
+            ChangeTextBox(R.ReceivedData);  
         }
 
         private void client_OnClientFileSending(object Sender, ClientFileSendingArguments R)
         {
-            
+            //peut être après...
         }
 
         private void client_OnClientError(object Sender, ClientErrorArguments R)
@@ -99,8 +128,6 @@ namespace Ode_Chat_v1
         private void client_OnClientDisconnected(object Sender, ClientDisconnectedArguments R)
         {
             ChangeTextBox(R.EventMessage);
-
-           
         }
 
         private void client_OnClientConnecting(object Sender, ClientConnectingArguments R)
@@ -112,12 +139,20 @@ namespace Ode_Chat_v1
         private void client_OnClientConnected(object Sender, ClientConnectedArguments R)
         {
             ChangeTextBox(R.EventMessage);
-
         }
 
         private void Form1_FormClosing(object sender, FormClosingEventArgs e)
         {
-            System.Environment.Exit(System.Environment.ExitCode);
+            try
+            {
+                client.Disconnect();
+                System.Environment.Exit(System.Environment.ExitCode);
+            }
+            catch
+            {
+                System.Environment.Exit(System.Environment.ExitCode);
+            }
+            
         }
 
         private void button1_Click(object sender, EventArgs e)
@@ -126,7 +161,6 @@ namespace Ode_Chat_v1
             {
                 client.Send(textBox2.Text);
                 textBox2.Clear();
-
             }
         }
 
@@ -165,19 +199,21 @@ namespace Ode_Chat_v1
         }
 
 
-
-        private void Form1_Activated(object sender, EventArgs e)
-        {
-            
-        }
-
         private void Form1_HelpButtonClicked(object sender, CancelEventArgs e)
         {
-            if (MessageBox.Show("Do you want to exit?", "My Application",
-         MessageBoxButtons.YesNo, MessageBoxIcon.Question)
-         == DialogResult.Yes)
+            MessageBox.Show("Ode Chat version 0.0.1 \nCréé par valentinbreiz\nCe logiciel utilise l'API NetworksAPI.\nLes sources sont disponibles sur github.com/valentinbreiz", "À propos",
+            MessageBoxButtons.OK, MessageBoxIcon.Information);
+        }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            if (checkBox1.Checked == true)
             {
-                Application.Exit();
+                textBox5.Visible = true;
+            }
+            else
+            {
+                textBox5.Visible = false;
             }
         }
     }
